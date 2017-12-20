@@ -24,10 +24,7 @@ describe('<Row/>', () => {
 
     test('should render normal cell', () => {
         const wrapper = mount(<Row row={{title: "Some title", cells: [{id: 0}]}}/>);
-        expect(wrapper.contains(
-            <NormalCell id={0} key={0}/>
-        ))
-            .toBeTruthy();
+        expect(wrapper.find(NormalCell).exist()).toBeTruthy();
     });
 
     test('should render whole row', () => {

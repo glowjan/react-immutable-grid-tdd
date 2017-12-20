@@ -20,21 +20,21 @@ describe('<GridContainer/>', () => {
     });
 
     test('should render grid with not empty rows', () => {
-        const wrapper = mount(<GridContainer rows={['Apples']} columns={0}/>);
-        expect(wrapper.exists()).toBeTruthy();
-        expect(wrapper.contains(<Grid grid={[{title:'Apples', cells:[]}]} />)).toBeTruthy();
+        var grid = new GridContainer({rows:['Apples'], columns:0}).state.grid
+        expect(grid[0].title === 'Apples').toBeTruthy();
+        expect(grid[0].cells).toHaveLength(0);
     });
 
     test('should render grid with 2 columns and 1 row', () => {
-        const wrapper = mount(<GridContainer rows={['Apples']} columns={2}/>);
-        expect(wrapper.exists()).toBeTruthy();
-        expect(wrapper.contains(<Grid grid={[{title:'Apples', cells:[{id:0, active:false}, {id:1, active:false}]}]} />)).toBeTruthy();
+        var grid = new GridContainer({rows:['Apples'], columns:2}).state.grid
+        expect(grid[0].title === 'Apples').toBeTruthy();
+        expect(grid[0].cells).toHaveLength(2);
+
     });
 
     test('should render grid with 2 columns and 2 rows', () => {
-        const wrapper = mount(<GridContainer rows={['Apples','Oranges']} columns={2}/>);
-        expect(wrapper.exists()).toBeTruthy();
-        expect(wrapper.contains(<Grid grid={[{title:'Apples', cells:[{id:0, active:false}, {id:1, active:false}]},
-            {title:'Oranges', cells:[{id:0, active:false}, {id:1, active:false}]}]} />)).toBeTruthy();
+        var grid = new GridContainer({rows:['Apples', 'Oranges'], columns:2}).state.grid
+        expect(grid[0].title === 'Apples').toBeTruthy();
+        expect(grid[1].title === 'Oranges').toBeTruthy();
     });
 });

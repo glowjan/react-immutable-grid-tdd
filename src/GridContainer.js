@@ -9,6 +9,7 @@ class GridContainer extends React.Component {
             return {
                 title: row,
                 cells: this.createRow(row, cols),
+                onCellClick: this.onCellClick(index)
             }
         });
     }
@@ -27,22 +28,28 @@ class GridContainer extends React.Component {
         this.state = {
             grid: this.createGrid(props.columns, props.rows)
         }
+
+        this.onCellClick = this.onCellClick.bind(this);
     }
 
     onCellClick(rowId) {
-        return function(columnId) {
-            const immutableGrid = Immutable.fromJS(this.state.grid);
-            const newGrid = immutableGrid.updateIn([rowId, 'cells', columnId, 'active'], active => !active).toJS();
+        return function (columnId) {
+            return function () {
+                const immutableGrid = Immutable.fromJS(this.state.grid);
+                const newGrid = immutableGrid.updateIn([rowId, 'cells', columnId, 'active'], active => !active).toJS();
 
-            this.setState({
-                grid: newGrid,
-            });
-        }
+                this.setState({
+                    grid: newGrid,
+                });
+            }.bind(this)
+        }.bind(this)
     }
 
     render() {
         return (
-            <Grid grid={this.state.grid}/>
+            <div>
+                <Grid grid={this.state.grid}/>
+            </div>
         );
     }
 }

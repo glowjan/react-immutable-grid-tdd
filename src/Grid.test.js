@@ -26,11 +26,6 @@ describe('<Grid/>', () => {
     test('should render two rows', () => {
         const wrapper = mount(<Grid grid={[{title: "First", cells: ['some']},{title: "Second", cells: ['some']}]}/>);
         expect(wrapper.exists()).toBeTruthy();
-        expect(wrapper.contains(
-            <div className='grid'>
-                <Row key={0} row={{title: "First", cells: ['some']}}/>
-                <Row key={1} row={{title: "Second", cells: ['some']}} />
-            </div>))
-            .toBeTruthy();
+        expect(wrapper.find(Row)).toHaveLength(2);
     });
 });
