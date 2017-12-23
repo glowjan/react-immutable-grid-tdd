@@ -4,6 +4,7 @@ import GridContainer from "./GridContainer";
 import Grid from "./Grid";
 import Adapter from 'enzyme-adapter-react-16';
 import * as Enzyme from "enzyme";
+import History from "./History";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -37,4 +38,11 @@ describe('<GridContainer/>', () => {
         expect(grid[0].title === 'Apples').toBeTruthy();
         expect(grid[1].title === 'Oranges').toBeTruthy();
     });
+
+    test('should render empty grid', () => {
+        const wrapper = mount(<GridContainer rows={[]} columns={2}/>);
+        expect(wrapper.exists()).toBeTruthy();
+        expect(wrapper.contains(<History />)).toBeTruthy();
+    });
+
 });

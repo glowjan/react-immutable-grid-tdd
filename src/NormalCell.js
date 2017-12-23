@@ -2,14 +2,14 @@ import React from "react";
 
 class NormalCell extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.onCellClick = this.onCellClick.bind(this);
     }
 
     get classNames() {
         return [
-            this.props.active ? 'cell active' : 'cell'
+            'cell', this.props.active ? 'active' : ''
         ].join(' ');
     }
 
